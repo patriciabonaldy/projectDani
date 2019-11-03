@@ -5,6 +5,9 @@ from modules.clientes.cliente import customers
 from modules.sistemas.profi import profis
 from modules.sistemas.nightrunho import nr_status
 from modules.tiendas.tienda import stores
+import json
+
+
 app=Flask(__name__)
 
 
@@ -12,6 +15,12 @@ app=Flask(__name__)
 def Index():
     #return 'Aplicacion conecta a Base de Datos'
     return render_template('index.html')
+
+@app.route('/tienda', methods=['GET'])
+def getTienda():
+    l_store = stores()
+    jsonObj = json.dumps(l_store)
+    return jsonObj
 
 
 @app.route('/tiendas', methods=['GET'])
@@ -32,7 +41,7 @@ def profimet():
     return render_template('profimetrics.html', profi1 = l_profi)
 
 @app.route('/nrstatus/', methods=['GET'])
-def nr_stat():
+def getNr_stat():
     l_nrst = nr_status()
     print (l_nrst)
     return render_template('nrstatus.html', nrst1 = l_nrst)
