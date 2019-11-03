@@ -1,6 +1,6 @@
 from flask import Flask
 from flask import request, jsonify, render_template, request
-from config.database import OracleDB
+#from config.database import OracleDB
 from modules.clientes.cliente import customers
 from modules.sistemas.profi import profis
 from modules.sistemas.nightrunho import nr_status
@@ -14,12 +14,11 @@ def Index():
     return render_template('index.html')
 
 
-@app.route('/tiendas/', methods=['GET'])
+@app.route('/tiendas', methods=['GET'])
 def getStore():
     l_store = stores()
     print (l_store)
-    return render_template('tiendas.html', store = l_store)
-    #return l_res
+    return render_template('tiendas.html', store = l_store) 
 
 @app.route('/clientes/', methods=['GET'])
 def getCustomers():
